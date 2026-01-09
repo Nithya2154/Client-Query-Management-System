@@ -42,7 +42,7 @@ def client_page():
                 mobile,
                 heading,
                 description,
-                "Open",
+                "Opened",
                 datetime.now(),
                 None
             ))
@@ -62,3 +62,4 @@ def client_page():
             st.session_state.page = "login"
             st.rerun()
             # st.experimental_rerun()
+
