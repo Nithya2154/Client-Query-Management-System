@@ -58,7 +58,7 @@ def support_page():
         ))
         conn.commit()
         st.success(f"Query {query_id_input} Closed Successfully!")
-        st.rerun()
+        # st.rerun()
 
         # st.experimental_rerun()
 
@@ -69,3 +69,4 @@ def support_page():
 # st.experimental_rerun()
 
     conn.close()
+
