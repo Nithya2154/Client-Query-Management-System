@@ -1,5 +1,5 @@
 # Client-Query-Management-System
-OVERVIEW
+# OVERVIEW
 This project is a role-based web application built using Streamlit and PostgreSQL.
 It provides a simple login system with two roles:
 
@@ -9,7 +9,7 @@ Support Team
 
 Clients can submit support queries, and the Support Team can view, filter, and close those queries through a dashboard.
 
-FEATURES
+# FEATURES
 
 Authentication
 
@@ -19,7 +19,7 @@ Passwords validated using SHA-256 hashing
 
 Session-based navigation using Streamlit session state
 
-Client Module
+# Client Module
 
 Submit support queries with:
 
@@ -35,7 +35,7 @@ Queries are stored in PostgreSQL
 
 Query status initialized as Open
 
-Support Team Module
+# Support Team Module
 
 View all client queries in a dashboard
 
@@ -53,13 +53,13 @@ Close queries by Query ID
 
 Automatic timestamping for query closure
 
-Database Integration
+# Database Integration
 
 PostgreSQL used as backend database
 
 psycopg2 used for database connectivity
 
-PROJECT STRUCTURE
+# PROJECT STRUCTURE
 
 app.py
 
@@ -89,7 +89,7 @@ requirements.txt
 
 List of required Python dependencies
 
-DATABASE REQUIREMENTS
+# DATABASE REQUIREMENTS
 
 PostgreSQL database configuration (example from code):
 
@@ -129,7 +129,7 @@ query_created_time (TIMESTAMP)
 
 query_closed_time (TIMESTAMP, nullable)
 
-INSTALLATION
+# INSTALLATION
 
 Clone the repository
 git clone <repository-url>
@@ -146,7 +146,7 @@ Create the database and required tables
 
 Update database credentials in database.py if needed
 
-RUNNING THE APPLICATION
+# RUNNING THE APPLICATION
 
 Run the Streamlit app using:
 
@@ -154,7 +154,7 @@ streamlit run app.py
 
 The application will open in your browser.
 
-SECURITY NOTES
+# SECURITY NOTES
 
 Passwords are hashed using SHA-256 before validation
 
@@ -178,7 +178,7 @@ psycopg2
 
 Pandas
 
-USE CASES
+# USE CASES
 
 Internal helpdesk systems
 
