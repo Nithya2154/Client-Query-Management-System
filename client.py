@@ -30,30 +30,33 @@ def client_page():
         if not email or not mobile or not heading or not description:
             st.error("All fields are required!")
         else:
-            conn = get_connection()
-            cursor = conn.cursor()
+            try:
+                conn = get_connection()
+                cursor = conn.cursor()
+    
+                cursor.execute("""
+                    INSERT INTO client_queries
+                    (email_id, mobile_number, query_heading, query_description, status, query_created_time, query_closed_time)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """, (
+                    email,
+                    mobile,
+                    heading,
+                    description,
+                    "Opened",
+                    datetime.now(),
+                    None
+                ))
+    
+                conn.commit()
+                conn.close()
 
-            cursor.execute("""
-                INSERT INTO client_queries
-                (email_id, mobile_number, query_heading, query_description, status, query_created_time, query_closed_time)
-                VALUES (%s, %s, %s, %s, %s, %s, %s)
-            """, (
-                email,
-                mobile,
-                heading,
-                description,
-                "Opened",
-                datetime.now(),
-                None
-            ))
-
-            conn.commit()
-            conn.close()
-
-            st.success(f"✅ Query Submitted Successfully on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}!")
+                st.success(f"✅ Query Submitted Successfully on {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}!")
 
 
-    st.markdown("---")
+                st.markdown("---")
+            except Exception as e:
+                st.title("Connection Failed")
 
     # --- Footer / Logout ---
     col1, col2 = st.columns([3, 1])
@@ -62,4 +65,5 @@ def client_page():
             st.session_state.page = "login"
             st.rerun()
             # st.experimental_rerun()
+
 
