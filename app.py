@@ -50,35 +50,38 @@ if st.session_state.page == "login":
             password_error.empty()
        
         if valid:
-            conn=db.get_connection()
-            cursor = conn.cursor()
-            hashed_password = hashlib.sha256(password.encode()).hexdigest()
+            try:
+                conn=db.get_connection()
+                cursor = conn.cursor()
+                hashed_password = hashlib.sha256(password.encode()).hexdigest()
 
-            query = """
-            SELECT * FROM users
-            WHERE username = %s AND hashed_password = %s
-            """
+                query = """
+                    SELECT * FROM users
+                    WHERE username = %s AND hashed_password = %s
+                    """
 
-            cursor.execute(query, (username, hashed_password))
-            user = cursor.fetchone()
-            if user:
-                st.session_state.username = username
-                st.session_state.role = role
-                st.session_state.page = "client" if role == "Client" else "support"
-                st.rerun()
-            else:
-                st.error("❌ Invalid username or password")
-            # if username in USERS:
-            #     if USERS[username]["password"] == password and USERS[username]["role"] == role:
-            #         st.session_state.username = username
-            #         st.session_state.role = role
-            #         st.session_state.page = "client" if role == "Client" else "support"
-            #         st.rerun()
-            #     else:
-            #         st.error("❌ Invalid password or role")
-            # else:
-            #     st.error("❌ User not found")
-
+                cursor.execute(query, (username, hashed_password))
+                user = cursor.fetchone()
+                if user:
+                    st.session_state.username = username
+                    st.session_state.role = role
+                    st.session_state.page = "client" if role == "Client" else "support"
+                    st.rerun()
+                else:
+                    st.error("❌ Invalid username or password")
+                # if username in USERS:
+                #     if USERS[username]["password"] == password and USERS[username]["role"] == role:
+                #         st.session_state.username = username
+                #         st.session_state.role = role
+                #         st.session_state.page = "client" if role == "Client" else "support"
+                #         st.rerun()
+                #     else:
+                #         st.error("❌ Invalid password or role")
+                # else:
+                #     st.error("❌ User not found")
+            except Exception as e:
+                st.title('Invalid Connection')
+                st.caption(str(e))
     if cancel_btn:
         st.rerun()
 
@@ -91,3 +94,4 @@ elif st.session_state.page == "client":
 elif st.session_state.page == "support":
     import support_team
     support_team.support_page()
+
